@@ -2,6 +2,7 @@
 #include <vector>
 #include <map>
 #include <algorithm>
+#include <chrono>
 using namespace std;
 
 int get_path_cost(vector<int> vertices, vector<vector<int>> paths, int n){
@@ -32,6 +33,8 @@ int main(){
         }
     }
 
+    auto t1 = chrono::high_resolution_clock::now();
+
     vector <int> path(n);
     vector <int> min_path;
     for (int i = 0; i < n; i++){path[i] = i;}
@@ -48,4 +51,8 @@ int main(){
 
     cout << min_path_cost << endl;
     print_path(min_path);
+
+    auto t2 = chrono::high_resolution_clock::now();
+    auto duration = chrono::duration_cast<std::chrono::nanoseconds>(t2 - t1).count();
+    cout << "Time is " << duration << endl; // 1288487 nanosecs
 }
